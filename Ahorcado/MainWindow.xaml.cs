@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Ahorcado
         //Creamos tres variables globales para poder manejar el programa
         string palabra; //Para generar la palabra que vamos a usar y guardarla
         int j = 0, condicionVictoria = 0; //Para guardar la imagen en la que nos encontramos y una variable que suma 1 cada vez que acertamos una letra
+        ArrayList botones = new ArrayList();
 
         public MainWindow()
         {
@@ -54,6 +56,7 @@ namespace Ahorcado
                 Button boton = new Button();
                 boton.Margin = new Thickness(3);
                 LetrasUniformGrid.Children.Add(boton);
+                botones.Add(boton);
                 boton.Tag = letras[i].ToString();
 
                 //Añadimos el evento
@@ -99,6 +102,7 @@ namespace Ahorcado
             j = 0;
             BitmapImage src = new BitmapImage(new Uri("/assets/0.jpg", UriKind.Relative));
             Imagen.Source = src;
+            condicionVictoria = 0;
         }
 
         public void Derrota()
@@ -118,6 +122,7 @@ namespace Ahorcado
             j = 0;
             BitmapImage src = new BitmapImage(new Uri("/assets/0.jpg", UriKind.Relative));
             Imagen.Source = src;
+            condicionVictoria = 0;
         }
 
         public void LimpiarGrid()
@@ -145,7 +150,7 @@ namespace Ahorcado
                 }
             }
 
-            if(condicionVictoria == palabra.Length)
+            if (condicionVictoria == palabra.Length)
             {
                 Victoria();
             }
@@ -155,7 +160,7 @@ namespace Ahorcado
                 j++;
                 BitmapImage src = new BitmapImage(new Uri("/assets/" + j + ".jpg", UriKind.Relative));
                 Imagen.Source = src;
-                if(j == 10)
+                if (j == 10)
                 {
                     Derrota();
                 }
@@ -179,6 +184,7 @@ namespace Ahorcado
             j = 0;
             BitmapImage src = new BitmapImage(new Uri("/assets/0.jpg", UriKind.Relative));
             Imagen.Source = src;
+            condicionVictoria = 0;
         }
 
         private void Button_ClickNewGame(object sender, RoutedEventArgs e)
@@ -197,6 +203,7 @@ namespace Ahorcado
             j = 0;
             BitmapImage src = new BitmapImage(new Uri("/assets/0.jpg", UriKind.Relative));
             Imagen.Source = src;
+            condicionVictoria = 0;
         }
 
 
@@ -205,6 +212,7 @@ namespace Ahorcado
             char[] palabraArray = palabra.ToCharArray();
             string letra = e.Key.ToString(); //Convertimos lo que nos devuelve la tecla a string.
             bool acierto = false;
+
 
             for (int i = 0; i < palabraArray.Length; i++)
             {
@@ -216,6 +224,15 @@ namespace Ahorcado
                 }
             }
 
+            for (int j = 0; j < 27; j++)
+            {
+                Button boton = (Button)botones[j];
+                if (e.Key.ToString() == boton.Tag.ToString())
+                {
+                    boton.IsEnabled = false;
+                }
+            }
+            
             if (condicionVictoria == palabra.Length)
             {
                 Victoria();
