@@ -94,7 +94,7 @@ namespace Ahorcado
 
         public void Victoria()
         {
-            MessageBox.Show("Enhorabuena!! Has ganado!!", "Victoria");
+            MessageBox.Show("Enhorabuena!! Has ganado!!", "Victoria", MessageBoxButton.OK, MessageBoxImage.Information);
             LimpiarGrid();
             GenerarPalabra();
             GenerarLetras();
@@ -114,7 +114,7 @@ namespace Ahorcado
                 ((TextBlock)((Border)LetrasPalabra.Children[i]).Child).Text = palabraArray[i].ToString();
             }
 
-            MessageBox.Show("Has perdido!", "Derrota");
+            MessageBox.Show("Has perdido!", "Derrota", MessageBoxButton.OK, MessageBoxImage.Error);
             LimpiarGrid();
             GenerarPalabra();
             GenerarLetras();
@@ -176,7 +176,7 @@ namespace Ahorcado
                 ((TextBlock)((Border)LetrasPalabra.Children[i]).Child).Text = palabraArray[i].ToString();
             }
 
-            MessageBox.Show("Rendirse es de cobardes...", "Derrota");
+            MessageBox.Show("Rendirse es de cobardes...", "Derrota", MessageBoxButton.OK, MessageBoxImage.Warning);
             LimpiarGrid();
             GenerarPalabra();
             GenerarLetras();
